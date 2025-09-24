@@ -1,0 +1,57 @@
+contacts = []
+
+def show_menu():
+    print("
+===== Contact Book Menu =====")
+    print("1. Add contact")
+    print("2. Search contact")
+    print("3. Delete contact")
+    print("4. View all contacts")
+    print("5. Exit")
+
+while True:
+    show_menu()
+    choice = input("Choose an option (1-5): ")
+
+    if choice == "1":
+        name = input("Enter contact name: ")
+        number = input("Enter contact phone number: ")
+        contact = {"name": name, "number": number}
+        contacts.append(contact)
+        print(f"Contact {name} added.")
+    elif choice == "2":
+        if not contacts:
+            print("No contacts available.")
+        else:
+            search_name = input("Enter name to search: ")
+            for contact in contacts:
+                if contact["name"].lower() == search_name.lower():
+                    print(f"Found contact - Name: {contact['name']}, Phone: {contact['number']}")
+                    break
+            else:
+                print("Contact not found.")
+    elif choice == "3":
+        if not contacts:
+            print("No contacts available to delete.")
+        else:
+            del_name = input("Enter name to delete: ")
+            for contact in contacts:
+                if contact["name"].lower() == del_name.lower():
+                    contacts.remove(contact)
+                    print(f"Contact {del_name} deleted.")
+                    break
+            else:
+                print("Contact not found.")
+    elif choice == "4":
+        if not contacts:
+            print("No contacts to display.")
+        else:
+            print("
+All Contacts:")
+            for contact in contacts:
+                print(f"Name: {contact['name']}, Phone: {contact['number']}")
+    elif choice == "5":
+        print("Exiting Contact Book. Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please select 1-5.")
